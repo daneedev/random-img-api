@@ -18,3 +18,5 @@ API({
     apiDomain: 'localhost:4000' // your domain on which will api work (if you want to use localhost do it with port)
 })
 ```
+# ➕ Links
+- [Package link](https://www.npmjs.com/package/randomimgapi)
