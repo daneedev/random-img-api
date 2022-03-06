@@ -1,11 +1,7 @@
-exports.API = async function(options) {
+exports.API = async function({imgFolder, port, apiURL, apiDomain}) {
     const express = require('express');
     const fs = require("fs");
     const app = express();
-    const folder = options.imgFolder
-    const port = options.port
-    const url = options.apiURL
-    const domain = options.apiDomain
     const path = require('path')
     const axios = require('axios')
     const Updater = await axios.get('https://registry.npmjs.org/randomimgapi')
@@ -20,17 +16,17 @@ exports.API = async function(options) {
     }
     
     // Using app.get instead of express.static, so files upload instantly
-    app.get(`/${folder}/:path`, async (req, res) => {
-      const pathfolder = path.resolve(__dirname + `../../../${folder}/${req.params.path}`)
+    app.get(`/${imgFolder}/:path`, async (req, res) => {
+      const pathfolder = path.resolve(__dirname + `../../../${imgFolder}/${req.params.path}`)
       if (!fs.existsSync(pathfolder)) return res.sendStatus(404);
       
       res.setHeader("Content-Type", "image/png");
       res.send(fs.readFileSync(pathfolder));
     });
     
-    app.get(`/${url}`, async (req, res) => {
-      const pathfolder2 = path.resolve(__dirname + `../../../${folder}`)
-    const images = fs.readdirSync(pathfolder2).map(img => `https://${domain}/${folder}/${img}`);
+    app.get(`/${apiURL}`, async (req, res) => {
+      const pathfolder2 = path.resolve(__dirname + `../../../${imgFolder}`)
+    const images = fs.readdirSync(pathfolder2).map(img => `https://${apiDomain}/${imgFolder}/${img}`);
       const randomimage = images[Math.floor(Math.random() * images.length)];
       res.header("Access-Control-Allow-Origin", "*");
       res.json({
