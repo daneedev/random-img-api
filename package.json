@@ -4,7 +4,7 @@
   "description": "The API that can generate random images.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Done!\""
   },
   "repository": {
     "type": "git",
