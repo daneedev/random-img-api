@@ -1,4 +1,4 @@
-# ❔ About
+# ❔ About ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/daneeskripter/random-img-api/CodeQL)
 With this package you can create API that will randomly generates images.
 # 🏁 Installation
 ```sh
