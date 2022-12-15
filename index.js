@@ -1,4 +1,4 @@
-exports.API = async function({imgFolder, port, apiURL, apiDomain}) {
+exports.API = async function({imgFolder, port, apiURL, apiDomain, rateLimit}) {
     const express = require('express');
     const fs = require("fs");
     const app = express();
@@ -14,14 +14,21 @@ exports.API = async function({imgFolder, port, apiURL, apiDomain}) {
     } else {
       console.log('\x1b[93m', '[RandomImgApi Updater]', '\x1b[32m', 'You are using latest version!', '\x1b[0m')
     }
-    
+    var RateLimit = require('express-rate-limit');
+    var limiter = new RateLimit({
+    windowMs: 1*60*1000, // 1 minute
+    max: rateLimit
+    });
+    const sanitize = require("sanitize-filename");
+    app.use(limiter)
+
     // Using app.get instead of express.static, so files upload instantly
     app.get(`/${imgFolder}/:path`, async (req, res) => {
-      const pathfolder = path.resolve(__dirname + `../../../${imgFolder}/${req.params.path}`)
-      if (!fs.existsSync(pathfolder)) return res.sendStatus(404);
+      const pathfolder = path.resolve(__dirname + `../../../${imgFolder}/${sanitize(req.params.path)}`)
+      if (!fs.existsSync(sanitize(pathfolder))) return res.sendStatus(404);
       
       res.setHeader("Content-Type", "image/png");
-      res.send(fs.readFileSync(pathfolder));
+      res.send(fs.readFileSync(sanitize(pathfolder)));
     });
     
     app.get(`/${apiURL}`, async (req, res) => {

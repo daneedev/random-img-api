@@ -15,7 +15,8 @@ API({
     imgFolder: 'img', // folder where you will store images
     port: 4000, // the port on which the api will run
     apiURL: '' , // leave it blank if you want use it on main page (https://yourdomain.com/)
-    apiDomain: 'localhost:4000' // your domain on which will api work (if you want to use localhost do it with port)
+    apiDomain: 'localhost:4000', // your domain on which will api work (if you want to use localhost do it with port)
+    rateLimit: 10 // number of allowed requests per minute
 })
 ```
 # ✅ Hosting
@@ -31,4 +32,5 @@ API({
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x  | :white_check_mark: |
+| 1.0.x  | :x: |
+| 1.1.x  | :white_check_mark: |

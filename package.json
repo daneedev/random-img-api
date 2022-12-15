@@ -1,6 +1,6 @@
 {
   "name": "randomimgapi",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "The API that can generate random images.",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,9 @@
   "dependencies": {
     "axios": "^0.26.0",
     "express": "^4.17.3",
+    "express-rate-limit": "^6.7.0",
     "fs": "^0.0.1-security",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sanitize-filename": "^1.6.3"
   }
 }
